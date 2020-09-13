@@ -1,0 +1,16 @@
+---
+- hosts: database
+  become: yes
+  become_user: root
+  vars_files:
+      - roles/postgresql/vars/RedHat-7.yml
+  roles:
+      - postgresql
+
+- hosts: "zabbix-server"
+  become: yes
+  roles:
+    - { role: zabbix-server, zabbix_server_database: pgsql, zabbix_server_database_long: postgresql }    
+    - { role: apache }
+    - { role: zabbix-web, zabbix_url: "109.95.209.149", zabbix_server_database: pgsql, zabbix_server_database_long: postgresql, zabbix_server_dbport: 5432}
+    - { role: postinstall}

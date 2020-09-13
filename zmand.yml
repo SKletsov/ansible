@@ -1,0 +1,9 @@
+---
+    - name: worker server
+      hosts: elasticsearch
+      roles:
+       - role: ruby
+       - role: elasticsearch
+       - role: nginx
+       - role: ansible-role-zammad
+        
