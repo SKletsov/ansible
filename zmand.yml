@@ -1,9 +1,16 @@
 ---
+    - hosts: database
+      become: yes
+      become_user: root
+      vars_files:
+         - roles/postgresql/vars/RedHat-7.yml
+      roles:
+        - postgresql
     - name: worker server
       hosts: elasticsearch
       roles:
        - role: ruby
        - role: elasticsearch
        - role: nginx
-       - role: ansible-role-zammad
+       - role: zammad
         
